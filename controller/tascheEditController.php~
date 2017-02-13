@@ -21,7 +21,7 @@
 	$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 	$extension_upload = strtolower(  substr(  strrchr($_FILES['bild']['name'], '.')  ,1)  );
 	
-	if(!(isset($name) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\- ]){2,100})$#", $name)))
+	if(!(isset($name) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-äÄöÖüÜß ]){2,100})$#", $name)))
 		$err_name = true;
 	
 	if(!(isset($menge) AND intval($menge) >= 0))
@@ -66,7 +66,8 @@
 			
 			}
 				$req = $bdd->query('SELECT IDTasche FROM tasche WHERE IDTasche='.$_GET['idt']);
-				$id = $req->fetch()['IDTasche'];
+				$data = $req->fetch();
+				$id = $data['IDTasche'];
 				$req = $bdd->prepare('UPDATE hatkategorie SET IDKategorie=:IDKategorie
 					WHERE IDTasche=:IDTasche');
 				$req->execute(array('IDKategorie'=>$kategorie, 'IDTasche'=>$_GET['idt']));

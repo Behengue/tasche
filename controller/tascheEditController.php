@@ -66,7 +66,8 @@
 			
 			}
 				$req = $bdd->query('SELECT IDTasche FROM tasche WHERE IDTasche='.$_GET['idt']);
-				$id = $req->fetch()['IDTasche'];
+				$data = $req->fetch();
+				$id = $data['IDTasche'];
 				$req = $bdd->prepare('UPDATE hatkategorie SET IDKategorie=:IDKategorie
 					WHERE IDTasche=:IDTasche');
 				$req->execute(array('IDKategorie'=>$kategorie, 'IDTasche'=>$_GET['idt']));

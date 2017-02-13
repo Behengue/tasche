@@ -3,11 +3,11 @@
 	include 'functions.php';	
 	
 	$bdd = getBDD();
-	if(!empty($_POST['kategorien'])){
-		foreach($_POST['kategorien'] as $selected){
-			$req = $bdd->exec("DELETE FROM hatkategorie WHERE IDKategorie=".$selected);
-			$req = $bdd->exec("DELETE FROM kategorie WHERE IDKategorie=".$selected);
+	if(!empty($_POST['design'])){
+		foreach($_POST['design'] as $selected){
+			$req = $bdd->exec("DELETE FROM hatdesign WHERE IDDesign=".$selected);
+			$req = $bdd->exec("DELETE FROM design WHERE IDDesign=".$selected);
 		}
 	}
-	header('Location: ../view/kategorieVerwaltung.php?delete_success=1');
+	header('Location: ../view/designVerwaltung.php?delete_success=1');
 ?>

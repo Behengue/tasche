@@ -72,7 +72,6 @@ body{
 #contain-body{
     background-color: #f0f5f5;
     width:100%;
-    padding-bottom: 200px;
 }
 
 .navbar{

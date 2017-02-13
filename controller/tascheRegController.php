@@ -54,8 +54,9 @@
 			$req->execute(array('NameTasche'=>$name, 'Menge'=>$menge, 'Preis'=>$preis, 'PATH'=>$filename, 'IDDesign'=>$design, 'IDMarke'=>$marke, 'BeschreibungTasche'=>$beschreibung));
 			
 			$req = $bdd->query('SELECT IDTasche FROM tasche WHERE PATH=\''.$filename.'\'');
-			echo $filename;
-			$id = $req->fetch()['IDTasche'];
+			
+			$data = $req->fetch();
+			$id = $data['IDTasche'];
 			$req = $bdd->prepare('INSERT INTO hatkategorie (IDTasche, IDKategorie)
 				VALUES(:IDTasche, :IDKategorie)');
 			$req->execute(array('IDTasche'=>$id, 'IDKategorie'=>$kategorie));

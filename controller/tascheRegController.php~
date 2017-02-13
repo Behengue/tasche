@@ -21,7 +21,7 @@
 	$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 	$extension_upload = strtolower(  substr(  strrchr($_FILES['bild']['name'], '.')  ,1)  );
 	
-	if(!(isset($name) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\- ]){2,100})$#", $name)))
+	if(!(isset($name) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-äÄöÖüÜß ]){2,100})$#", $name)))
 		$err_name = true;
 	
 	if(!(isset($menge) AND intval($menge) >= 0))
@@ -54,8 +54,9 @@
 			$req->execute(array('NameTasche'=>$name, 'Menge'=>$menge, 'Preis'=>$preis, 'PATH'=>$filename, 'IDDesign'=>$design, 'IDMarke'=>$marke, 'BeschreibungTasche'=>$beschreibung));
 			
 			$req = $bdd->query('SELECT IDTasche FROM tasche WHERE PATH=\''.$filename.'\'');
-			echo $filename;
-			$id = $req->fetch()['IDTasche'];
+			
+			$data = $req->fetch();
+			$id = $data['IDTasche'];
 			$req = $bdd->prepare('INSERT INTO hatkategorie (IDTasche, IDKategorie)
 				VALUES(:IDTasche, :IDKategorie)');
 			$req->execute(array('IDTasche'=>$id, 'IDKategorie'=>$kategorie));

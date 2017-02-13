@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
-	include 'head.php'
+	include 'head.php';
   ?>
   <body>
   <?php

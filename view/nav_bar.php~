@@ -4,18 +4,17 @@
 <div class="navbar navbar-default navbar-fixed-top" id="navbar">
           <div class="container-fluid" id="containerNavBar">
             <div class="navbar-header">
-              <a class="navbar-brand" href="index.php">K&oumlnigsreichTasche</a>
-              <span><img id="logo" src="../media/500_F_43284985_CDLQaeuPVUe2j10Zlw8gMfoDH64dpEis.jpg"/></span>
+              <span><a class="navbar-brand" href="index.php">K&oumlnigsreichTasche</a><img id="logo" src="../media/500_F_43284985_CDLQaeuPVUe2j10Zlw8gMfoDH64dpEis.jpg"/></span>
             </div>
             <ul class="nav navbar-nav">
               <li class="active"><a href="/tasche/view/">Home</a></li>
 			  <?php
 			  	try{
 					$bdd = getBDD();
-							$query = $bdd->query('SELECT * FROM kategorie');
+					$query = $bdd->query('SELECT * FROM kategorie');
 			while($donnees = $query->fetch()){
 			?>
-			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo mb_convert_encoding($donnees['NameKategorie'], 'UTF-8'); ?><span class="caret"></span></a>
+			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $donnees['NameKategorie']; ?><span class="caret"></span></a>
                 <div class="dropdown-menu unter_kategorie">
                   <table class="table">
                     <thead>
@@ -35,9 +34,9 @@
 							ty.IDType=hty.IDType AND hty.IDTasche=t.IDTasche AND t.IDTasche=hk.IDTasche AND hk.IDKategorie='.$donnees['IDKategorie'].' GROUP BY NameType');
 							$queryDesign = $bdd->query('SELECT COUNT(*) FROM tasche t, hatkategorie hk, kategorie k, design d WHERE
 							d.IDDesign=t.IDDesign AND t.IDTasche=hk.IDTasche AND hk.IDKategorie='.$donnees['IDKategorie'].' GROUP BY NameDesign');
-							$lgMarke = $queryMarke->fetch()[0];
-							$lgDesign = $queryDesign->fetch()[0];
-							$lgType = $queryType->fetch()[0];
+							$lgMarke = $queryMarke->fetchColumn();
+							$lgDesign = $queryDesign->fetchColumn();
+							$lgType = $queryType->fetchColumn();
 							
 							//Extraction des donnees des requestes
 							$queryMarke = $bdd->query('SELECT * FROM marke m, tasche t, hatkategorie hk, kategorie k WHERE
