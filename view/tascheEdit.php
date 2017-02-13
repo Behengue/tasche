@@ -7,7 +7,6 @@
   <?php
 	include 'head.php';
 	include 'nav_bar.php';
-	include '../controller/functions.php';
   ?>
 	<body>
 	<?php

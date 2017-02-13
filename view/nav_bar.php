@@ -1,3 +1,6 @@
+<?php
+?>
+
 <div class="navbar navbar-default navbar-fixed-top" id="navbar">
           <div class="container-fluid" id="containerNavBar">
             <div class="navbar-header">
@@ -8,7 +11,7 @@
               <li class="active"><a href="/tasche/view/">Home</a></li>
 			  <?php
 			  	try{
-					$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+					$bdd = getBDD();
 							$query = $bdd->query('SELECT * FROM kategorie');
 			while($donnees = $query->fetch()){
 			?>
@@ -91,10 +94,10 @@
 						<a tabindex="-1" href="taschenVerwaltung.php">Taschen</a>
 					</li>
         			<li class="dropdown-submenu">
-						<a tabindex="-1" href="#">Kategorie</a>
+						<a tabindex="-1" href="kategorieVerwaltung.php">Kategorie</a>
 					</li>
         			<li class="dropdown-submenu">
-						<a tabindex="-1" href="#">Design</a>
+						<a tabindex="-1" href="designVerwaltung.php">Design</a>
 					</li>
         			<li class="dropdown-submenu">
 						<a tabindex="-1" href="#">Type</a>

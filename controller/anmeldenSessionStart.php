@@ -1,8 +1,9 @@
 <?php
 	session_start();
+	include 'functions.php';
 	
 	$id = $_GET['id'];
-	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+	$bdd = getBDD();
 	$query = $bdd->query('SELECT * FROM kunde WHERE IDKunde = \''.$id.'\'');
 	$user = $query->fetch();
 	$_SESSION['id'] = $id;

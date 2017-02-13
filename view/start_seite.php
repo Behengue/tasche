@@ -9,14 +9,7 @@
   ?>
   <body>
   <?php
-	function getCount($query){
-		$i = 0;
-		while($query->fetch()){
-			$i++;
-		}
-		return $i;
-	}
-  	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+  	$bdd = getBDD();
 	if(isset($_GET['user_create']) AND $_GET['user_create'] == 1){
 		?>
 	<div class="container">

@@ -43,7 +43,7 @@
       				</tr>
     				</thead>
     				<tbody>
-    				<form method="POST" action="../controller/tascheLoeschen.php">
+    				<form method="POST" action="../controller/tascheLoeschen.php" id="form">
         <?php
         	$bdd = getBDD();
         	$taschen = $bdd->query('SELECT * FROM tasche ORDER BY NameTasche');

@@ -1,4 +1,7 @@
 <?php
+	session_start();
+	include 'functions.php';
+
 	$err_name = false;
 	$err_vorname = false;
 	$err_strasse = false;
@@ -24,25 +27,25 @@
 	$ibank = htmlspecialchars($_POST['ibank']);
 	
 	
-	if(!(isset($name) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\- ]){2,100})$#", $name)))
+	if(!(isset($name) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-äÄöÖüÜß ]){2,100})$#", $name)))
 		$err_name = true;
 	
-	if(!(isset($vorname) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\- ]){2,100})$#", $vorname)))
+	if(!(isset($vorname) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-äÄöÖüÜß ]){2,100})$#", $vorname)))
 		$err_vorname = true;
 	
-	if(!(isset($strasse) AND preg_match("#^(^([a-zA-Z]){4,100}(\.)? [0-9]{1,4}[a-zA-Z]{0,3})$#", $strasse)))
+	if(!(isset($strasse) AND preg_match("#^(^([a-zA-ZäÄöÖüÜß]){4,100}(\.)? [0-9]{1,4}[a-zA-ZäÄöÖüÜß]{0,3})$#", $strasse)))
 		$err_strasse = true;
 	
 	if(!(isset($plz) AND preg_match("#^([0-9]{5})$#", $plz)))
 		$err_plz = true;
 	
-	if(!(isset($stadt) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\- ]){2,100})$#", $stadt)))
+	if(!(isset($stadt) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-äÄöÖüÜß ]){2,100})$#", $stadt)))
 		$err_stadt = true;
 	
 	if(!(isset($email) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z0-9\.\_\-]){2,60}@[a-zA-Z]{1,1}([a-zA-Z0-9\.\_\-]){2,40}\.[a-zA-Z]{1,5})$#", $email)))
 		$err_email = true;
 
-	if(!(isset($username) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\-\.\_]){2,100})$#", $username)))
+	if(!(isset($username) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-\.\_äÄöÖüÜß]){2,100})$#", $username)))
 		$err_username = true;
 
 	if(!(isset($pwd) AND preg_match("#^(.{8,20})$#", $pwd)))
@@ -55,7 +58,7 @@
 		$err_ibank = true;
 
 
-  	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+  	$bdd = getBDD();
 	
 	try{
 		$query = $bdd->query('SELECT COUNT(*) FROM kunde WHERE Username = \''.$username.'\' or Email = \''.$email.'\'');

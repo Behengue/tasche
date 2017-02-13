@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include 'functions.php';
 	
 	$root_dir = '../media/';
 	$err_name = false;
@@ -20,7 +21,7 @@
 	$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 	$extension_upload = strtolower(  substr(  strrchr($_FILES['bild']['name'], '.')  ,1)  );
 	
-	if(!(isset($name) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\- ]){2,100})$#", $name)))
+	if(!(isset($name) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-äÄöÖüÜß ]){2,100})$#", $name)))
 		$err_name = true;
 	
 	if(!(isset($menge) AND intval($menge) >= 0))
@@ -42,7 +43,7 @@
 	if(!(isset($beschreibung) AND strlen($beschreibung) <= 255))
 		$err_beschreibung = true;
 	
-  	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+  	$bdd = getBDD();
 	
 	try{
 		if($err_name OR $err_menge OR $err_preis OR $err_beschreibung OR $err_bild)
@@ -50,7 +51,6 @@
 			.$err_bild.'&err_beschreibung='.$err_beschreibung);
 		else{
 			if(file_exists($_FILES['bild']['tmp_name'][0])){
-				echo $_GET['idt'];
 				$extension_upload = strtolower(substr(strrchr($_FILES['bild']['name'], '.'), 1));
 				$filename = $root_dir.''.md5($beschreibung.''.$menge.''.$name.''.$kategorie.''.$marke.''.$_FILES["bild"]["name"].''.date("Y/m/d_h:i:sa")).'.'.$extension_upload;
 			

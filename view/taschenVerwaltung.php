@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	include '../controller/functions.php';
 ?>
 
 <!DOCTYPE html>

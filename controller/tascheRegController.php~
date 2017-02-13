@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include 'functions.php';
 	
 	$root_dir = '../media/';
 	$err_name = false;
@@ -30,14 +31,14 @@
 		$err_preis = true;
 	
 	$type_file = $_FILES['bild']['type'];
-	if(!(isset($_FILES["bild"]) AND file_exists($_FILES['bild']['tmp_name'][0]) AND $_FILES["bild"]["size"] < 1500000000
+	if(!(isset($_FILES['bild']['tmp_name']) AND file_exists($_FILES['bild']['tmp_name'][0]) AND $_FILES["bild"]["size"] < 1500000000
 		AND in_array($extension_upload,$extensions_valides)))
 		$err_bild = true;
 	
 	if(!(isset($beschreibung) AND strlen($beschreibung) <= 255))
 		$err_beschreibung = true;
 	
-  	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+  	$bdd = getBDD();
 	
 	try{
 		if($err_name OR $err_menge OR $err_preis OR $err_beschreibung OR $err_bild)

@@ -1,3 +1,6 @@
+<?php
+	include '../controller/functions.php';
+?>
 <head>
     <title>K&oumlnigsreichTasche</title>
     <meta HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">

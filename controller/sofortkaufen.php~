@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	include 'functions.php';
 	
 	//sauvegade des donnees
 	$_SESSION['idt'] = $_GET['idt'];

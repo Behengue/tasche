@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include 'functions.php';
 	
 	$id = $_GET['id'];
 	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');

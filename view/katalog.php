@@ -8,14 +8,7 @@ session_start();
   ?>
   <body>
   <?php
-	function getCount($query){
-		$i = 0;
-		while($query->fetch()){
-			$i++;
-		}
-		return $i;
-	}
-  	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+  	$bdd = getBDD();
 	include 'nav_bar.php';
 	try{
 	$query = $bdd->query('SELECT * FROM tasche WHERE IDTasche = \''.$_GET['id'].'\'');

@@ -1,6 +1,7 @@
 <?php
+	include '../controller/functions.php';
 	$menge = (int)$_GET['nbarticle'];
-	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+	$bdd = getBDD();
 	$query = $bdd->query('SELECT * FROM tasche');
 	try{
 		while($donnees = $query->fetch()){

@@ -9,7 +9,7 @@ $err_user_not_exist = false;
 $username = htmlspecialchars($_POST['username']);
 $pwd = htmlspecialchars($_POST['pwd']);
 
-if(!(isset($username) AND preg_match("#^([a-zA-ZäÄöÖüÜß]{1,1}([a-zA-Z\-\.\_äÄöÖüÜß]){2,100})$#", $username)))
+if(!(isset($username) AND preg_match("#^([a-zA-Z]{1,1}([a-zA-Z\-\.\_]){2,100})$#", $username)))
 	$err_username = true;
 	
 if(!(isset($pwd) AND preg_match("#^(.{8,20})$#", $pwd)))

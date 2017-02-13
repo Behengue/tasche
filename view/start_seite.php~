@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include '../controller/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,14 +10,7 @@
   ?>
   <body>
   <?php
-	function getCount($query){
-		$i = 0;
-		while($query->fetch()){
-			$i++;
-		}
-		return $i;
-	}
-  	$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
+  	$bdd = getBDD();
 	if(isset($_GET['user_create']) AND $_GET['user_create'] == 1){
 		?>
 	<div class="container">
@@ -47,13 +41,6 @@
 	?>
     <div class="container" id="body">
       <div>
-        <footer class="navbar navbar-default navbar-fixed-bottom">
-          <div class="container">
-            <ul class="nav navbar-nav">
-              <li><a href="#">Projekt Datenbank</a></li>
-            </ul>
-          </div>
-        </footer>
         <?php include 'nav_bar.php' ?>
         <?php include 'caroussel.php'?>
 		<?php include 'alltasche.php'?>
