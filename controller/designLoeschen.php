@@ -5,7 +5,7 @@
 	$bdd = getBDD();
 	if(!empty($_POST['design'])){
 		foreach($_POST['design'] as $selected){
-			$req = $bdd->exec("DELETE FROM hatdesign WHERE IDDesign=".$selected);
+			$req = $bdd->exec("UPDATE tasche SET IDDesign=NULL WHERE IDDesign=".$selected);
 			$req = $bdd->exec("DELETE FROM design WHERE IDDesign=".$selected);
 		}
 	}

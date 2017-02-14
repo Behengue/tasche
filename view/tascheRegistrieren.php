@@ -17,7 +17,7 @@
 	?>
 	<div class="container">
 		<div class="row" style="margin-top:80px;">
-			  <h3>profil</h3>
+			  <h3>Neue Tasche</h3>
 		 <form class="form-group" action="../controller/tascheRegController.php" method="POST" enctype="multipart/form-data" class="form col-lg-push-3 col-lg-6">
 					<div class="form-group">
 					<label for="name">Name:</label>

@@ -18,13 +18,13 @@
 	
 	try{
 		if($err_name OR $err_bezeichnung)
-			header('Location: ../view/kategorieRegistrieren.php?err_name='.$err_name.'&err_bezeichnung='.$err_bezeichnung);
+			header('Location: ../view/designRegistrieren.php?err_name='.$err_name.'&err_bezeichnung='.$err_bezeichnung);
 		else{
-			$req = $bdd->prepare('INSERT INTO kategorie (NameKategorie, BezeichnungKategorie)
-				VALUES(:NameKategorie, :BezeichnungKategorie)');
-			$req->execute(array('NameKategorie'=>$name, 'BezeichnungKategorie'=>$bezeichnung));
+			$req = $bdd->prepare('INSERT INTO design (NameDesign, BezeichnungDesign)
+				VALUES(:NameDesign, :BezeichnungKategorie)');
+			$req->execute(array('NameDesign'=>$name, 'BezeichnungDesign'=>$bezeichnung));
 			
-			header('Location: ../view/kategorieVerwaltung.php?tasche_create=1');
+			header('Location: ../view/designVerwaltung.php?design_create=1');
 		}
 	}catch(Exception $e){
 		die('Fehler:' .$e->getMessage());

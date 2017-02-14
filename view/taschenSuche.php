@@ -10,14 +10,14 @@
   <body style="padding-top:100px;">
         <?php include 'nav_bar.php' ?>
         <div class="container">
-        	<div class="row"><h2 class="col-sm-offset-4">Taschenverwaltung</h2></div>
+        		<div class="row"><h2 class="col-sm-offset-4">Taschensuche</h2></div>
         		<div class="row">
 					<a href="#" class="col-sm-offset-4 col-sm-2"><button type="button" id="loeschen" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> Löschen</span></button></a>
 					<a href="tascheRegistrieren.php" class="col-sm-2"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"> Einfügen</span></button></a>
 					<a href="#" class="col-sm-2"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#filter">
 						<span class="glyphicon glyphicon-filter"> Suche</span></button></a>
+					<!-- Modal -->
 					<?php include 'filterSuche.php'; ?>
-					
         <div class="table-responsive">       
   				<table class="table">
     				<thead>
@@ -38,8 +38,37 @@
     				<form method="POST" action="../controller/tascheLoeschen.php" id="form">
         <?php
         	$bdd = getBDD();
-        	$taschen = $bdd->query('SELECT * FROM tasche ORDER BY NameTasche');
+        	$suche = $_POST['suche'];
+        	$preismin = floatval($_POST['preisMin']);
+        	$preismax = floatval($_POST['preisMax']);
+        	$mengemin = intval($_POST['mengeMin']);
+        	$mengemax = intval($_POST['mengeMax']);
+        	$idDesign = $_POST['design'];
+        	$idMarke = $_POST['type'];
+        	$idKategorie = $_POST['kategorie'];
+        	$idType = $_POST['type'];
+        	
+        	$request = "SELECT * FROM tasche t, hatkategorie hk, hattype ht WHERE t.NameTasche LIKE '%".$suche."%' ";
+        	if($_POST['preisMin'] != "")
+        		$request = $request."AND t.Preis >= ". $preismin;
+        	if($_POST['preisMax'] != "")
+        		$request = $request." AND t.Preis <= ". $preismax;
+        	if($_POST['mengeMin'] != "")
+        		$request = $request." AND t.Menge >= ". $mengemin;
+        	if($_POST['mengeMax'] != "")
+        		$request = $request." AND t.Menge <= ". $mengemax;
+        	if($_POST['kategorie'] != "")
+        		$request = $request." AND hk.IDKategorie=".$idKategorie." AND hk.IDTasche = t.IDTasche";
+        	if($_POST['type'] != "")
+        		$request = $request." AND hk.IDType=".$idType." AND hk.IDTasche = t.IDTasche";
+        	if($_POST['design'] != "")
+        		$request = $request." AND t.IDDesign = ".$idDesign;
+        	if($_POST['marke'] != "")
+        		$request = $request." AND t.IDMarke = ".$idMarke;
+        	
+        	$taschen = $bdd->query($request);
         	$i = 1;
+        	if($taschen != false){
         	while($tasche = $taschen->fetch()) {
         		$queryDesign = $bdd->query('SELECT * FROM design WHERE IDDesign='.$tasche['IDDesign']);
 				$queryMarke = $bdd->query('SELECT * FROM marke WHERE IDMarke='.$tasche['IDMarke']);
@@ -69,6 +98,7 @@
         		<?php
         		$i++;
         	}
+        }
         ?>
         </form>
     				</tbody>

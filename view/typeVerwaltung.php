@@ -11,9 +11,9 @@
         <?php include 'nav_bar.php' ?>
         <div class="container">
         		<div class="row">
-        			<div class="row"><h2 class="col-sm-offset-4">Designverwaltung</h2></div>
+        			<div class="row"><h2 class="col-sm-offset-4">Typverwaltung</h2></div>
 					<a href="#" class="col-sm-offset-4 col-sm-2"><button type="button" id="loeschen" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> Löschen</span></button></a>
-					<a href="designRegistrieren.php" class="col-sm-2"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"> Einfügen</span></button></a>
+					<a href="typeRegistrieren.php" class="col-sm-2"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"> Einfügen</span></button></a>
   				</div>
         </div>
         <div class="table-responsive">       
@@ -21,22 +21,22 @@
     				<thead>
       				<tr>
       					<th><input type="checkbox" id="checkall"/></th>
-        					<th>Name der Design</th>
+        					<th>Name der Type</th>
         					<th>Bezeichnung</th>
       				</tr>
     				</thead>
     				<tbody>
-    				<form method="POST" action="../controller/designLoeschen.php" id="form">
+    				<form method="POST" action="../controller/typeLoeschen.php" id="form">
         <?php
         	$bdd = getBDD();
-        	$designn = $bdd->query('SELECT * FROM design ORDER BY NameDesign');
+        	$typen = $bdd->query('SELECT * FROM type ORDER BY NameType');
         	$i = 1;
-        	while($design = $designn->fetch()) {
+        	while($type = $typen->fetch()) {
         		?>   
       				<tr>
-      					<td><input type="checkbox" id="design<?php echo $i;?>" name="design[]" value="<?php echo $design['IDDesign'];?>"></td>
-      					<td><a href="designEdit.php?idd=<?php echo $design['IDDesign'];?>"><?php echo $design['NameDesign'];?></a></td>
-      					<td><?php echo $design['BezeichnungDesign'];?></td>
+      					<td><input type="checkbox" id="type<?php echo $i;?>" name="typen[]" value="<?php echo $type['IDType'];?>"></td>
+      					<td><a href="typeEdit.php?idk=<?php echo $type['IDType'];?>"><?php echo $type['NameType'];?></a></td>
+      					<td><?php echo $type['BezeichnungType'];?></td>
       				</tr>
         		<?php
         		$i++;
@@ -45,23 +45,23 @@
         </form>
     				</tbody>
   				</table>
-  				<input type="hidden" value="<?php echo $i;?>" id="nbDesign"/>
+  				<input type="hidden" value="<?php echo $i;?>" id="nbType"/>
         </div>
   </body>
   <script type="text/javascript">
   	var checkall = document.getElementById('checkall'),
-  		nbDesign = document.getElementById('nbDesign'),
+  		nbType = document.getElementById('nbType'),
   		loeschen = document.getElementById('loeschen'),
   		form = document.getElementById('form');
   	checkall.addEventListener('change', function () {
   		if(this.checked == true){
-  			for(var i = 1; i <= parseInt(nbDesign.value); i++){
-  				elem = document.getElementById("design" + i);
+  			for(var i = 1; i <= parseInt(nbType.value); i++){
+  				elem = document.getElementById("type" + i);
   				elem.checked = true;
   			}
   		}else{                            
-  			for(var i = 1; i <= parseInt(nbDesign.value); i++){
-  				elem = document.getElementById("design" + i);
+  			for(var i = 1; i <= parseInt(nbType.value); i++){
+  				elem = document.getElementById("type" + i);
   				elem.checked = false;
   			}
   		}

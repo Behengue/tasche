@@ -47,15 +47,17 @@
 					<?php }
 							$queryDesign = $bdd->query('SELECT * FROM design WHERE IDDesign='.$donnees['IDDesign']);
 							$queryMarke = $bdd->query('SELECT * FROM marke WHERE IDMarke='.$donnees['IDMarke']);
-							$design = $queryDesign->fetch();
-							$marke = $queryMarke->fetch();
+							if($queryDesign != false)
+								$design = $queryDesign->fetch();
+							if($queryMarke != false)
+								$marke = $queryMarke->fetch();
 							?>
 								<div class="col-lg-6">
 									<a href="katalog.php?id=<?php echo $donnees['IDTasche'];?>"> <img src="<?php echo $donnees['PATH'] ?>" class="col-lg-6" id="product"/>
 									<p class="col-lg-6" id="kurzbeschreibung">
-										<b><?php echo $marke['NameMarke']; ?></b><br>
-										<?php echo $donnees['NameTasche']; ?><br>
-										<?php echo $donnees['Preis']; ?>
+										<b><?php if(isset($marke['NameMarke'])) echo $marke['NameMarke']; else echo $marke['NameMarke'];?></b><br>
+										<?php if(isset($donnees['NameTasche'])) echo $donnees['NameTasche']; else echo $donnees['NameTasche']; ?><br>
+										<?php if(isset($donnees['Preis'])) echo $donnees['Preis']; else echo $donnees['Preis']; ?>
 										<br>
 										<span>
 										<?php

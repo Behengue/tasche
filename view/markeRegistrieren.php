@@ -11,8 +11,8 @@
 	<body>
 	<div class="container">
 		<div class="row" style="margin-top:80px;">
-			  <h3>Neues Design</h3>
-		 <form class="form-group" action="../controller/designRegController.php" method="POST" enctype="multipart/form-data" class="form col-lg-push-3 col-lg-6">
+			  <h3>Neue Marke</h3>
+		 <form class="form-group" action="../controller/markeRegController.php" method="POST" enctype="multipart/form-data" class="form col-lg-push-3 col-lg-6">
 					<div class="form-group">
 					<label for="name">Name:</label>
 					<input type="text" name="name" class="form-control" required/>
@@ -25,7 +25,7 @@
 				?>
 				</div>
 				<div class="form-group">
-					<label for="bezeichnung">Designbezeichnung (max. 255 Zeichen):</label>
+					<label for="bezeichnung">Markebezeichnung (max. 255 Zeichen):</label>
 					<textarea name="bezeichnung" class="form-control"/></textarea>
 					<?php
 					if(isset($_GET['err_bezeichnung']) and $_GET['err_bezeichnung'] == true){
@@ -36,7 +36,7 @@
 				?>
 				</div>
 					<input type="submit" value="Einstellen" class="btn btn-success" id="submit" style="margin-top:10px;"/>
-					<a href="designVerwaltung.php"><input value="Abbrechen" class="btn btn-danger" style="margin-top:10px;"></a>
+					<a href="markeVerwaltung.php"><input value="Abbrechen" class="btn btn-danger" style="margin-top:10px;"></a>
 				</form>
 		</div>
 		</div>

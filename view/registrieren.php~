@@ -2,7 +2,6 @@
 	session_start();
 	include 'head.php';
 	include 'nav_bar.php';
-	include '../controller/functions.php';
 	
 	$err_name = $err_vorname = $err_strasse = $err_stadt = $err_plz = $err_email = $err_username = $err_pwd = $err_rpwd = "";
 	$name = $email = $vorname = $strasse = $stadt = $plz = $username = $pwd = $rpwd = $iban = "";
