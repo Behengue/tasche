@@ -7,7 +7,6 @@
   <?php
 	include 'head.php';
 	include 'nav_bar.php';
-	include '../controller/functions.php';
   ?>
 	<body>
 	<?php
@@ -18,7 +17,9 @@
 				$queryMarke = $bdd->query('SELECT * FROM marke WHERE IDMarke='.$tasche['IDMarke']);
         		$queryKategorie = $bdd->query('SELECT * FROM kategorie k, hatkategorie hk WHERE k.IDKategorie=hk.IDKategorie AND hk.IDTasche='.$tasche['IDTasche']);
         		$queryType = $bdd->query('SELECT * FROM type t, hattype ht WHERE t.IDType=ht.IDType AND ht.IDTasche='.$tasche['IDTasche']);
+			if($queryDesign != false)
 				$design = $queryDesign->fetch();
+			if($queryMarke != false)
 				$marke = $queryMarke->fetch();
 				$kategorie = $queryKategorie->fetch();
 				$type = $queryType->fetch();
@@ -86,16 +87,18 @@
 					<label for="name">Marke:</label>
 					<select name="marke" class="form-control">
 						<?php
-							while($donneesMarke = $queryMarke->fetch()){
-								if($donneesMarke['IDMarke'] == $marke['IDMarke']){
-								?>
-									<option value="<?php echo $donneesMarke['IDMarke'];?>" selected><?php echo $donneesMarke['NameMarke'];?></option>
-								<?php
-							}else{
-								?>
-									<option value="<?php echo $donneesMarke['IDMarke'];?>"><?php echo $donneesMarke['NameMarke'];?></option>
-								<?php
-							}
+							if($queryMarke != false){
+								while($donneesMarke = $queryMarke->fetch()){
+									if(isset($marke['IDMarke']) AND $donneesMarke['IDMarke'] == $marke['IDMarke']){
+									?>
+										<option value="<?php echo $donneesMarke['IDMarke'];?>" selected><?php echo $donneesMarke['NameMarke'];?></option>
+									<?php
+								}else{
+									?>
+										<option value="<?php echo $donneesMarke['IDMarke'];?>"><?php echo $donneesMarke['NameMarke'];?></option>
+									<?php
+								}
+								}
 							}
 						?>
 					</select>
@@ -104,16 +107,18 @@
 					<label for="name">Design:</label>
 					<select name="design" class="form-control">
 						<?php
-							while($donneesDesign = $queryDesign->fetch()){
-								if($donneesDesign['IDDesign'] == $design['IDDesign']){
-								?>
-									<option value="<?php echo $donneesDesign['IDDesign'];?>" selected><?php echo $donneesDesign['NameDesign'];?></option>
-								<?php
-							}else{
-								?>
-									<option value="<?php echo $donneesDesign['IDDesign'];?>"><?php echo $donneesDesign['NameDesign'];?></option>
-								<?php
-							}
+							if($queryDesign != false){
+								while($donneesDesign = $queryDesign->fetch()){
+									if(isset($design['IDDesign']) AND $donneesDesign['IDDesign'] == $design['IDDesign']){
+									?>
+										<option value="<?php echo $donneesDesign['IDDesign'];?>" selected><?php echo $donneesDesign['NameDesign'];?></option>
+									<?php
+								}else{
+									?>
+										<option value="<?php echo $donneesDesign['IDDesign'];?>"><?php echo $donneesDesign['NameDesign'];?></option>
+									<?php
+								}
+								}
 							}
 						?>
 					</select>

@@ -26,7 +26,7 @@ session_start();
 				<fieldset><legend>Tasche</legend>
 						Name : <span ><?php echo $tasche['NameTasche']; ?></span><br>
 						Preis : <span ><?php echo $tasche['Preis']; ?></span><br>
-						Bezeichnung : <span><?php echo $tasche['NameTasche']; ?></span><br>
+						Bezeichnung : <span><?php echo $tasche['BeschreibungTasche']; ?></span><br>
 						Mengue : <span ><?php echo $tasche['Menge']; ?></span><br>
 					</fieldset>
 					<fieldset><legend>Marke</legend>

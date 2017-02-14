@@ -44,27 +44,67 @@
         	$mengemin = intval($_POST['mengeMin']);
         	$mengemax = intval($_POST['mengeMax']);
         	$idDesign = $_POST['design'];
-        	$idMarke = $_POST['type'];
+        	$idMarke = $_POST['marke'];
         	$idKategorie = $_POST['kategorie'];
         	$idType = $_POST['type'];
         	
-        	$request = "SELECT * FROM tasche t, hatkategorie hk, hattype ht WHERE t.NameTasche LIKE '%".$suche."%' ";
-        	if($_POST['preisMin'] != "")
-        		$request = $request."AND t.Preis >= ". $preismin;
-        	if($_POST['preisMax'] != "")
-        		$request = $request." AND t.Preis <= ". $preismax;
-        	if($_POST['mengeMin'] != "")
-        		$request = $request." AND t.Menge >= ". $mengemin;
-        	if($_POST['mengeMax'] != "")
-        		$request = $request." AND t.Menge <= ". $mengemax;
-        	if($_POST['kategorie'] != "")
-        		$request = $request." AND hk.IDKategorie=".$idKategorie." AND hk.IDTasche = t.IDTasche";
-        	if($_POST['type'] != "")
-        		$request = $request." AND hk.IDType=".$idType." AND hk.IDTasche = t.IDTasche";
-        	if($_POST['design'] != "")
-        		$request = $request." AND t.IDDesign = ".$idDesign;
-        	if($_POST['marke'] != "")
-        		$request = $request." AND t.IDMarke = ".$idMarke;
+        	$request = "SELECT * FROM tasche t, hatkategorie hk, hattype ht WHERE";
+        	$addRequest = false;
+        	if($_POST['suche'] != ""){
+        		$request = $request." (t.NameTasche LIKE '%".$suche."%' OR t.BeschreibungTasche LIKE '%".$suche."%')";
+        		$addRequest = true;
+        	}
+        	if($_POST['preisMin'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." t.Preis >= ". $preismin;
+        		$addRequest = true;
+        	}
+        	if($_POST['preisMax'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." t.Preis <= ". $preismax;
+        		$addRequest = true;
+        	}
+        	if($_POST['mengeMin'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." t.Menge >= ". $mengemin;
+        		$addRequest = true;
+        	}
+        	if($_POST['mengeMax'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." t.Menge <= ". $mengemax;
+        		$addRequest = true;
+        	}
+        	if($_POST['kategorie'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." hk.IDKategorie=".$idKategorie." AND hk.IDTasche = t.IDTasche";
+        		$addRequest = true;
+        	}
+        	if($_POST['type'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." ht.IDType=".$idType." AND ht.IDTasche = t.IDTasche";
+        		$addRequest = true;
+        	}
+        	if($_POST['design'] != ""){
+        		if($addRequest == true) 
+        			$request = $request." AND";
+        		$request = $request." t.IDDesign = ".$idDesign;
+        		$addRequest = true;
+        	}
+        	if($_POST['marke'] != ""){
+        		if($addRequest == true) 
+        			$request = $request."AND ";
+        		$request = $request." t.IDMarke = ".$idMarke;
+        		$addRequest = true;
+        	}
+        	if($addRequest == false)
+        		$request = "SELECT * FROM tasche t, hatkategorie hk, hattype ht";
+        	$request = $request." GROUP BY t.IDTasche";
         	
         	$taschen = $bdd->query($request);
         	$i = 1;

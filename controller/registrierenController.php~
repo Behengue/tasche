@@ -75,8 +75,8 @@
 		else{
 			$bdd = getBDD();
 			$nbKunde = $bdd->query('SELECT COUNT(*) FROM kunde');
-			$count = $query->fetch();
-			if($count[0] == 0)
+			$count = $nbKunde->fetch();
+			if($count[0] <= 0)
 				$typeKunde = true;
 			else
 				$typeKunde = false;

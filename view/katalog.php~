@@ -8,13 +8,6 @@ session_start();
   ?>
   <body>
   <?php
-	function getCount($query){
-		$i = 0;
-		while($query->fetch()){
-			$i++;
-		}
-		return $i;
-	}
   	$bdd = getBDD();
 	include 'nav_bar.php';
 	try{
@@ -33,7 +26,7 @@ session_start();
 				<fieldset><legend>Tasche</legend>
 						Name : <span ><?php echo $tasche['NameTasche']; ?></span><br>
 						Preis : <span ><?php echo $tasche['Preis']; ?></span><br>
-						Bezeichnung : <span><?php echo $tasche['NameTasche']; ?></span><br>
+						Bezeichnung : <span><?php echo $tasche['BeschreibungTasche']; ?></span><br>
 						Mengue : <span ><?php echo $tasche['Menge']; ?></span><br>
 					</fieldset>
 					<fieldset><legend>Marke</legend>

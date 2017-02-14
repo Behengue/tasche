@@ -75,7 +75,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="name">Marke:</label>
+					<label for="marke">Marke:</label>
 					<select name="marke" class="form-control">
 						<option value=""></option>
 						<?php

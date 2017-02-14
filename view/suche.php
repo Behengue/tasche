@@ -12,7 +12,7 @@
 			{
 	               try{
 						$bdd = getBDD();
-						$query = $bdd->query("SELECT * FROM tasche WHERE NameTasche LIKE '%".$suche."%' OR PATH LIKE '%".$suche."%'");
+						$query = $bdd->query("SELECT * FROM tasche WHERE NameTasche LIKE '%".$suche."%' OR BeschreibungTasche LIKE '%".$suche."%'");
 						$i = 0;
 							while($donnees = $query->fetch()){				
 								$queryDesign = $bdd->query('SELECT * FROM design WHERE IDDesign='.$donnees['IDDesign']);
@@ -28,7 +28,7 @@
 												<fieldset><legend>Tasche</legend>
 													Name : <span ><?php echo $donnees['NameTasche']; ?></span><br>
 													Preis : <span ><?php echo $donnees['Preis']; ?></span><br>
-													Bezeichnung : <span><?php echo $donnees['NameTasche']; ?></span><br>
+													Bezeichnung : <span><?php echo $donnees['BeschreibungTasche']; ?></span><br>
 													Mengue : <span ><?php echo $donnees['Menge']; ?></span><br>
 												</fieldset>
 												<fieldset><legend>Marke</legend>

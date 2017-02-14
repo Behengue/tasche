@@ -19,6 +19,7 @@
         		$queryType = $bdd->query('SELECT * FROM type t, hattype ht WHERE t.IDType=ht.IDType AND ht.IDTasche='.$tasche['IDTasche']);
 			if($queryDesign != false)
 				$design = $queryDesign->fetch();
+			if($queryMarke != false)
 				$marke = $queryMarke->fetch();
 				$kategorie = $queryKategorie->fetch();
 				$type = $queryType->fetch();
