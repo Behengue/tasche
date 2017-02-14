@@ -73,9 +73,15 @@
 			.$err_plz.'&err_stadt='.$err_stadt.'&err_email='.$err_email.'&err_username='.$err_username.'&err_pwd='.$err_pwd.'&err_repwd='
 			.$err_repwd.'&err_IBAN='.$err_ibank.'&err_user_exist='.$err_user_exist);
 		else{
-			$bdd = new PDO('mysql:host=localhost;dbname=taschen', 'root', '');
-			$req = $bdd->prepare('INSERT INTO kunde (Namekunde, Vorname, Strasse, PLZ, Stadt, Email, Username, Password, IBANkunde) VALUES(:Namekunde, :Vorname,:Strasse, :PLZ, :Stadt, :Email, :Username, :Password, :IBANkunde)');
-			$req->execute(array('Namekunde'=>$name,'Vorname'=>$vorname,'Strasse'=>$strasse,'PLZ'=>(int)$plz,'Stadt'=>$stadt,'Email'=>$email,'Username'=>$username,'Password'=>sha1($pwd),'IBANkunde'=>$ibank));
+			$bdd = getBDD();
+			$nbKunde = $bdd->query('SELECT COUNT(*) FROM kunde');
+			$count = $query->fetch();
+			if($count[0] == 0)
+				$typeKunde = true;
+			else
+				$typeKunde = false;
+			$req = $bdd->prepare('INSERT INTO kunde (Namekunde, Vorname, Strasse, PLZ, Stadt, Email, Username, Password, IBANkunde, TypeKunde) VALUES(:Namekunde, :Vorname,:Strasse, :PLZ, :Stadt, :Email, :Username, :Password, :IBANkunde, :TypeKunde)');
+			$req->execute(array('Namekunde'=>$name,'Vorname'=>$vorname,'Strasse'=>$strasse,'PLZ'=>(int)$plz,'Stadt'=>$stadt,'Email'=>$email,'Username'=>$username,'Password'=>sha1($pwd),'IBANkunde'=>$ibank, 'TypeKunde'=>$typeKunde));
 			header('Location: ../view/start_seite.php?user_create=1');
 		}
 	}catch(Exception $e){

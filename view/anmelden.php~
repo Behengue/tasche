@@ -16,7 +16,7 @@
       <input type="password" class="form-control" name="pwd">
     </div>
     <button type="submit" class="btn btn-success">Anmelden</button>
-	<a href="index.php"><button type="button" class="btn btn-danger">Abbrechen</button></a>
+	<a href="index.php"><button type="reset" class="btn btn-danger">Abbrechen</button></a>
   </form>
 </div>
 <div>
